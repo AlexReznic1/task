@@ -1,0 +1,99 @@
+<main>
+  <div class="row no-gutters justify-content-between">
+    <div class="title col-2">
+      <h3 class="text-capitalize">{{onParseTitle()}}</h3>
+    </div>
+
+    <div class="info col-6">
+      <div class="row no-gutters justify-content-end">
+        <div class="col-6 data">
+          <p>Last 30 days:8 Jul 2019 - 6 Aug 2019 <i class="fas fa-caret-down"></i></p>
+          <small>Note: Does not include today's data</small>
+        </div>
+
+        <div class="col-5">
+          <div class="update row no-gutters">
+            <p>Updated 5 minutes ago</p>
+            <button><i class="fas fa-sync"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input row no-gutters">
+    <i class="fas fa-search col-0"></i>
+    <input class="col" type="text" [placeholder]="'Search for a ' + onParsePlaceholder()">
+  </div>
+
+
+  <div class="row no-gutters create justify-content-end">
+    <button class="filter"><i class="fas fa-sort-amount-down-alt"></i> Filter <i class="fas fa-caret-down"></i></button>
+    <button class="create-element"><i class="fas fa-plus-circle"></i> Create {{onParsePlaceholder()}}</button>
+  </div>
+
+  <table>
+    <thead>
+    <th><input class="checkbox" type="checkbox"></th>
+    <th></th>
+    <th>Branch <i class="fas fa-sort-alpha-down"></i>
+    </th>
+    <th>Campaign Name <i class="fas fa-sort-alpha-down"></i>
+    </th>
+    <th>Status</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Target</th>
+    <th class="text-center">Result</th>
+    <th>Budget</th>
+    <th class="text-center">Spend</th>
+    <th>CR/Unit</th>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let row of table">
+      <td><input class="checkbox" type="checkbox"></td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" [checked]="row.status">
+          <span class="slider round"></span>
+        </label>
+      </td>
+
+      <td>
+        <p class="m-0">{{row.branch}}</p>
+        <span>{{row.type}}</span></td>
+      <td>{{row.name}}</td>
+      <td>
+        <p class="active" *ngIf="row.status"><i class="fas fa-circle"></i> Active</p>
+        <p class="inactive" *ngIf="!row.status"><i class="fas fa-circle"></i> Inactive</p>
+      </td>
+      <td>{{row.start}}</td>
+      <td>{{row.end}}</td>
+      <td>{{row.target}}</td>
+      <td class="text-center">
+        <div class="progress">
+          <div class="progress-bar" [class.red]="row.result > 0 && row.result < 40"
+               [class.yellow]="row.result > 41 && row.result < 70" [class.green]="row.result > 71" role="progressbar"
+               [style.width.%]="row.result"
+               [attr.aria-valuenow]="row.result" aria-valuemin="0"
+               aria-valuemax="100"></div>
+        </div>
+        <small class="text-center">{{row.result}} %</small>
+      </td>
+      <td>{{row.budget}}</td>
+      <td class="text-center">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [class.red]="row.spend > 0 && row.spend < 40"
+               [class.yellow]="row.spend > 41 && row.spend < 70" [class.green]="row.spend > 71"
+               [style.width.%]="row.spend" [attr.aria-valuenow]="row.spend"
+               aria-valuemin="0"
+               aria-valuemax="100"></div>
+        </div>
+        <small class="text-center">{{row.spend}} %</small>
+      </td>
+      <td class="text-center">{{row.unit}}</td>
+    </tr>
+    </tbody>
+  </table>
+</main>

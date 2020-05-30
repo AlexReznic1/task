@@ -1,0 +1,26 @@
+<div class="side-bar">
+  <div class="user">
+    <img src="../../../assets/images/17004.svg" alt="">
+    <p>John Stevenson</p>
+    <small>Managing Director</small>
+  </div>
+
+  <ul class="routes">
+    <ng-container *ngFor="let route of routes">
+      <li [attr.data-target]="'#' + route.id" [attr.arria-controls]="route.ariaControls"
+          [attr.data-toggle]="route.dataToggle" [attr.aria-expanded]="route.ariaExpended" [routerLink]="route.route"
+          routerLinkActive="active"><i
+        [class]="route.icon"></i>
+        <p>{{route.title}}</p>
+        <div class="text-right" style="flex:1" *ngIf="route.icon2">
+          <i [class]="route.icon2"></i>
+        </div>
+      </li>
+      <div class="collapse" [id]="route.id">
+        <div class="card card-body text-center">
+          <p>{{route.id}}</p>
+        </div>
+      </div>
+    </ng-container>
+  </ul>
+</div>
